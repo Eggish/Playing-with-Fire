@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mat_burnt
-  m_Shader: {fileID: -6465566751694194690, guid: c497e665812f80c47ae8c63555565ac5,
+  m_Shader: {fileID: -6465566751694194690, guid: bf2a6ad4edb23824e948ee9e9908770b,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -44,6 +44,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_C53D0EA0_Texture_1:
+        m_Texture: {fileID: 2800000, guid: de07f7e461cada4488c2be71f93829c2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_E5C571FB_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2d0048dad5f420d4497325f6249b64a1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_FEE0D1D4_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 3d1adea519eeda141bdcf15a1b9dbb94, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,7 +82,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - burnt_amount: 0.1
+    - burnt_amount: 0.48
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}

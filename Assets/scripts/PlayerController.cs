@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D Rigidbody = null;
 
+    [SerializeField] private Fire Fire = null;
+    [SerializeField] private Animator Animator = null;
+
     [SerializeField] private bool CanMoveInAir = true;
 
     [SerializeField] private float MaxRunspeed = 5.0f;
@@ -26,14 +29,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode JumpKey = KeyCode.W;
 
     [SerializeField] private float FireMaxBurnDistance = 4.0f;
-    [SerializeField] private float FireMaxBurnVelocity = 2.0f;
+    [SerializeField] private float FireMaxBurnVelocity = 0.01f;
 
     [SerializeField] private float JumpForce = 500.0f;
 
     private bool OnGround = false;
 
-    [SerializeField] private Fire Fire = null;
-    [SerializeField] private Animator Animator = null;
+    private float Health = 1.0f;
 
     void Start()
     {
@@ -76,6 +78,33 @@ public class PlayerController : MonoBehaviour
         }
 
         Rigidbody.velocity = velocity;
+
+        SetAnimations();
+    }
+
+    private void SetAnimations()
+    {
+        if(OnGround)
+        {
+            Animator.SetBool("OnGround", true);
+        }
+        else
+        {
+            Animator.SetBool("OnGround", true);
+        }
+
+        if (OnGround
+            &&
+            (Input.GetKey(LeftKey)
+        || Input.GetKey(RightKey)))
+        {
+            Animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            Animator.SetBool("IsWalking", false);
+        }
+
     }
 
     private Vector2 RunAcceleration(Vector2 pVelocity, Direction pDirection)
@@ -142,9 +171,17 @@ public class PlayerController : MonoBehaviour
 
     private void Burn(float pDistanceToFire)
     {
-        float burnPercentage = FireMaxBurnDistance - pDistanceToFire / FireMaxBurnDistance;
-        float scaleMagnitude = transform.localScale.magnitude;
-        scaleMagnitude -= FireMaxBurnVelocity * burnPercentage * Time.deltaTime;
-        transform.localScale = transform.localScale.normalized * scaleMagnitude;
+        float burnPercentage = (FireMaxBurnDistance - pDistanceToFire) / FireMaxBurnDistance;
+        Health -= FireMaxBurnVelocity * burnPercentage * Time.deltaTime;
+        if(Health < 0)
+        {
+            Health = 0;
+        }
+        SetHealth(Health);
+    }
+
+    private void SetHealth(float pCurrentHealth)
+    {
+        transform.localScale = Vector3.one * pCurrentHealth;
     }
 }

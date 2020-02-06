@@ -157,7 +157,8 @@ MonoBehaviour:
   FireMaxBurnVelocity: 0.03
   JumpForce: 300
   Fire: {fileID: 0}
-  Animator: {fileID: 0}
+  Animator: {fileID: 4138991780007988023}
+  IsWalking: 0
 --- !u!95 &4138991780007988023
 Animator:
   serializedVersion: 3

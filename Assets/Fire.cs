@@ -17,6 +17,8 @@ public class Fire : MonoBehaviour
     [SerializeField] private float MovementSpeed = 1.0f;
     [SerializeField] private float RotationSpeed = 180.0f;
 
+    [SerializeField] private PlayerController Paper = null;
+
     private float Health = 1.0f;
 
     private FireState CurrentState = FireState.WADDLE_IN;
@@ -100,6 +102,7 @@ public class Fire : MonoBehaviour
         }
 
         NextState();
+        Paper.enabled = true;
         yield return null;
 
     }

@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool OnGround = false;
 
     [SerializeField] private Fire Fire = null;
+    [SerializeField] private Animator Animator = null;
 
     void Start()
     {

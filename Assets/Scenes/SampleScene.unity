@@ -152,6 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4249951c9f2778c42a74d7116413e58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WaypointList: []
+  GoalDistanceThreshold: 0.1
+  MovementSpeed: 1
+  RotationSpeed: 180
+  Paper: {fileID: 0}
+  Health: 1
 --- !u!212 &373625359
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -575,6 +581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 1883540188}
+  Fire: {fileID: 0}
+  Animator: {fileID: 0}
   CanMoveInAir: 1
   MaxRunspeed: 5
   SecondsToMaxSpeed: 0.1
@@ -585,7 +593,6 @@ MonoBehaviour:
   FireMaxBurnDistance: 4
   FireMaxBurnVelocity: 0.03
   JumpForce: 300
-  Fire: {fileID: 0}
 --- !u!199 &1883540193
 ParticleSystemRenderer:
   serializedVersion: 6

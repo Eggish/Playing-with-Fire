@@ -10,7 +10,6 @@ public enum Direction
     LEFT
 };
 
-
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D Rigidbody = null;
@@ -33,9 +32,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float JumpForce = 500.0f;
 
-    private bool OnGround = false;
+    [SerializeField] private float FireDamage = 0.25f;
 
-    private float Health = 1.0f;
+    [SerializeField] private List<GameObject> BurnObjects = new List<GameObject>();
+
+    private bool OnGround = false;
+    private bool BeenBurnt = false;
 
     void Start()
     {
@@ -70,11 +72,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(JumpKey))
         {
             Jump();
-        }
-        float distanceToFire = Vector2.Distance(transform.position, Fire.transform.position);
-        if (distanceToFire < FireMaxBurnDistance)
-        {
-            Burn(distanceToFire);
         }
 
         Rigidbody.velocity = velocity;
@@ -169,19 +166,59 @@ public class PlayerController : MonoBehaviour
         OnGround = false;
     }
 
-    private void Burn(float pDistanceToFire)
+    private void OnTriggerEnter2D(Collider2D pCollider)
     {
-        float burnPercentage = (FireMaxBurnDistance - pDistanceToFire) / FireMaxBurnDistance;
-        Health -= FireMaxBurnVelocity * burnPercentage * Time.deltaTime;
-        if(Health < 0)
+        if (pCollider.CompareTag("Fire"))
         {
-            Health = 0;
+            if (!BeenBurnt)
+            {
+                Burn();
+            }
         }
-        SetHealth(Health);
     }
+
+    private void Burn()
+    {
+        GameManager.PlayerHealth -= FireDamage;
+
+        Fire.ChangeHealth(FireDamage);
+
+        BeenBurnt = true;
+        if (GameManager.PlayerHealth < 0)
+        {
+            GameManager.PlayerHealth  = 0;
+        }
+        SetHealth(GameManager.PlayerHealth);
+    }
+
 
     private void SetHealth(float pCurrentHealth)
     {
-        transform.localScale = Vector3.one * pCurrentHealth;
+        if(pCurrentHealth >= 1.0f)
+        {
+            return;
+        }
+        else if (pCurrentHealth <= 0.75f)
+        {
+            BurnObjects[0].SetActive(true);
+            BurnObjects[1].SetActive(false);
+            BurnObjects[2].SetActive(false);
+        }
+        else if (pCurrentHealth <= 0.5f)
+        {
+            BurnObjects[0].SetActive(true);
+            BurnObjects[1].SetActive(true);
+            BurnObjects[2].SetActive(false);
+        }
+        else if (pCurrentHealth <= 0.25f)
+        {
+            BurnObjects[0].SetActive(true);
+            BurnObjects[1].SetActive(true);
+            BurnObjects[2].SetActive(true);
+        }
+        else if (pCurrentHealth <= 0.0f)
+        {
+            GameManager.LoadScene(0);
+        }
     }
 }

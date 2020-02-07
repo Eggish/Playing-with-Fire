@@ -19,7 +19,7 @@ public class Fire : MonoBehaviour
 
     [SerializeField] private PlayerController Paper = null;
 
-    private float Health = 1.0f;
+    [SerializeField] private float Health = 0.5f;
 
     private FireState CurrentState = FireState.WADDLE_IN;
 
@@ -32,19 +32,19 @@ public class Fire : MonoBehaviour
 
     void Update()
     {
-        switch(CurrentState)
-        {
-            case FireState.WADDLE_IN:
-                MoveToWaypoint(CurrentWaypoint);
-                if (IsGoalReached(CurrentWaypoint))
-                {
-                    StartCoroutine(FallDown());
-                    NextState();
-                }
-                break;
-           case FireState.END_STATE:
-                break;
-        }
+        //switch(CurrentState)
+        //{
+        //    case FireState.WADDLE_IN:
+        //        MoveToWaypoint(CurrentWaypoint);
+        //        if (IsGoalReached(CurrentWaypoint))
+        //        {
+        //            //StartCoroutine(FallDown());
+        //            NextState();
+        //        }
+        //        break;
+        //    case FireState.END_STATE:
+        //        break;
+        //}
         transform.localScale = new Vector3(Health, Health, Health);
     }
 
@@ -77,33 +77,32 @@ public class Fire : MonoBehaviour
         }
     }
 
-    private IEnumerator FallDown()
-    {
+    //private IEnumerator FallDown()
+    //{
+    //    Vector3 eulerRotation = transform.rotation.eulerAngles;
+    //    eulerRotation.z += 90;
+    //    Quaternion rotationGoal = transform.rotation;
+    //    rotationGoal.eulerAngles = eulerRotation;
 
-        Vector3 eulerRotation = transform.rotation.eulerAngles;
-        eulerRotation.z += 90;
-        Quaternion rotationGoal = transform.rotation;
-        rotationGoal.eulerAngles = eulerRotation;
-
-        Quaternion originalRotation = transform.rotation;
+    //    Quaternion originalRotation = transform.rotation;
 
 
-        while(Vector3.Distance(transform.rotation.eulerAngles, rotationGoal.eulerAngles) >= 1.0f)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationGoal, RotationSpeed * Time.deltaTime);
-            yield return null;
-        }
-        Health -= 0.5f;
-        yield return new WaitForSeconds(1.0f);
-        while (Vector3.Distance(transform.rotation.eulerAngles, originalRotation.eulerAngles) >= 1.0f)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, originalRotation, RotationSpeed * Time.deltaTime);
-            yield return null;
-        }
+    //    while(Vector3.Distance(transform.rotation.eulerAngles, rotationGoal.eulerAngles) >= 1.0f)
+    //    {
+    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationGoal, RotationSpeed * Time.deltaTime);
+    //        yield return null;
+    //    }
+    //    Health -= 0.5f;
+    //    yield return new WaitForSeconds(1.0f);
+    //    while (Vector3.Distance(transform.rotation.eulerAngles, originalRotation.eulerAngles) >= 1.0f)
+    //    {
+    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, originalRotation, RotationSpeed * Time.deltaTime);
+    //        yield return null;
+    //    }
 
-        NextState();
-        Paper.enabled = true;
-        yield return null;
+    //    NextState();
+    //    Paper.enabled = true;
+    //    yield return null;
 
-    }
+    //}
 }

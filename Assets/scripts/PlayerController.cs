@@ -27,8 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode LeftKey = KeyCode.A;
     [SerializeField] private KeyCode JumpKey = KeyCode.W;
 
-    [SerializeField] private float FireMaxBurnDistance = 4.0f;
-    [SerializeField] private float FireMaxBurnVelocity = 0.01f;
+    [SerializeField] private float GroundCheckDistance = 1.4f;
 
     [SerializeField] private float JumpForce = 500.0f;
 
@@ -48,6 +47,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector2 velocity = Rigidbody.velocity;
+
+        CheckForGround();
 
         if(Input.GetKey(RightKey))
         {
@@ -77,6 +78,11 @@ public class PlayerController : MonoBehaviour
         Rigidbody.velocity = velocity;
 
         SetAnimations();
+    }
+
+    private void CheckForGround()
+    {
+        OnGround = Physics2D.Raycast(transform.position, Vector2.down, GroundCheckDistance);
     }
 
     private void SetAnimations()
@@ -130,7 +136,7 @@ public class PlayerController : MonoBehaviour
         {
             velocityMagnitude = 0;
         }
-        pVelocity = pVelocity.normalized * velocityMagnitude;
+        pVelocity.x = pVelocity.normalized.x * velocityMagnitude;
         return pVelocity;
     }
 

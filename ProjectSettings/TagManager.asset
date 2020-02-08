@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - Door
+  - FireExitTrigger
+  - Platform
+  - Water
+  - PuddleCutsceneTrigger
   layers:
   - Default
   - TransparentFX
@@ -14,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - Platform
   - 
   - 
   - 
@@ -39,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2722700075
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

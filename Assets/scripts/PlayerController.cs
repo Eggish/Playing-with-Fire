@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Direction
 {
@@ -27,13 +28,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private KeyCode LeftKey = KeyCode.A;
     [SerializeField] private KeyCode JumpKey = KeyCode.W;
 
-    [SerializeField] private float GroundCheckDistance = 1.4f;
+    [SerializeField] private BoxCollider2D Collider = null;
+
+    [SerializeField] private float GroundCheckRayLEngth = 0.1f;
 
     [SerializeField] private float JumpForce = 500.0f;
 
     [SerializeField] private float FireDamage = 0.25f;
 
     [SerializeField] private List<GameObject> BurnObjects = new List<GameObject>();
+    [SerializeField] private GameObject HelpfulJumpFire = null;
 
     private bool OnGround = false;
     private bool BeenBurnt = false;
@@ -82,7 +86,10 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForGround()
     {
-        OnGround = Physics2D.Raycast(transform.position, Vector2.down, GroundCheckDistance);
+        Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - Collider.size.y/2);
+        RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, GroundCheckRayLEngth);
+        OnGround = hit && hit.collider.CompareTag("Platform");
+        //OnGround = Physics2D.Raycast(transform.position, Vector2.down, GroundCheckDistance);
     }
 
     private void SetAnimations()
@@ -162,15 +169,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D pCollision)
-    {
-        OnGround = true;
-    }
+    //private void OnCollisionEnter2D(Collision2D pCollision)
+    //{
+    //    OnGround = true;
+    //}
 
-    private void OnCollisionExit2D(Collision2D pCollision)
-    {
-        OnGround = false;
-    }
+    //private void OnCollisionExit2D(Collision2D pCollision)
+    //{
+    //    OnGround = false;
+    //}
 
     private void OnTriggerEnter2D(Collider2D pCollider)
     {
@@ -180,6 +187,22 @@ public class PlayerController : MonoBehaviour
             {
                 Burn();
             }
+        }
+        if (pCollider.CompareTag("FireExitTrigger"))
+        {
+            Fire.ExitLevel();
+        }
+        if (pCollider.CompareTag("PuddleCutsceneTrigger"))
+        {
+            Animator.SetBool("IsWalking", false);
+            Fire.StartPuddleCutScene();
+            Rigidbody.velocity = Vector2.zero;
+            pCollider.gameObject.SetActive(false);
+            enabled = false;
+        }
+        if (pCollider.CompareTag("Water"))
+        {
+            GameManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

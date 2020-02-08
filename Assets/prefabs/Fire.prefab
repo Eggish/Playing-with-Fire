@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134460538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.14, z: 0}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3929041601763209934}
@@ -47,7 +47,7 @@ AreaEffector2D:
     m_Bits: 4294967295
   m_UseGlobalAngle: 0
   m_ForceAngle: 90
-  m_ForceMagnitude: 8
+  m_ForceMagnitude: 12
   m_ForceVariation: 0
   m_ForceTarget: 0
   m_Drag: 0
@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22893286, y: 5.2042174}
+  m_Offset: {x: -0.1444583, y: 7.5413375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5869474, y: 6.824439}
+  m_Size: {x: 5.445386, y: 11.498679}
   m_EdgeRadius: 0
 --- !u!1 &2007465621758124463
 GameObject:
@@ -748,7 +748,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.1
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -807,8 +807,8 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 2.16, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 36.9}
+    m_Position: {x: 0, y: 1.55, z: 0}
+    m_Rotation: {x: 0, y: 0, z: 35}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -945,9 +945,9 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 102.79
-      mode: 2
-      spread: 0.06
+      value: 120
+      mode: 0
+      spread: 0.01
       speed:
         serializedVersion: 2
         minMaxState: 0
@@ -1007,7 +1007,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7
+      scalar: 1
       minScalar: 10
       maxCurve:
         serializedVersion: 2

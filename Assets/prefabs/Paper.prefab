@@ -765,7 +765,8 @@ MonoBehaviour:
   RightKey: 100
   LeftKey: 97
   JumpKey: 119
-  GroundCheckDistance: 1.8
+  Collider: {fileID: 4138991780007987977}
+  GroundCheckRayLEngth: 0.1
   JumpForce: 400
   FireDamage: 0.25
   BurnObjects:

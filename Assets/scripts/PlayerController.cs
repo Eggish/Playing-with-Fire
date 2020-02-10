@@ -38,6 +38,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private List<GameObject> BurnObjects = new List<GameObject>();
 
+    [SerializeField] private List<AudioClip> WalkSounds = new List<AudioClip>();
+    [SerializeField] private float PitchVariety = 0.1f;
+    [SerializeField] private AudioSource[] Sources = null;
+
     private bool OnGround = false;
     private bool BeenBurnt = false;
 
@@ -132,7 +136,30 @@ public class PlayerController : MonoBehaviour
         {
             pVelocity += (Vector2.left * (MaxRunspeed / SecondsToMaxSpeed) * Time.deltaTime);
         }
+
+        PlayWalkSound();
+        
         return pVelocity;
+    }
+
+    private void PlayWalkSound()
+    {
+        AudioSource freeSource = null;
+        foreach (AudioSource s in Sources)
+        {
+            if (!s.isPlaying)
+            {
+                freeSource = s;
+            }
+        }
+
+        if (freeSource == null)
+            return;
+
+        freeSource.clip = WalkSounds[Random.Range(0, WalkSounds.Capacity)];
+        freeSource.pitch = 1 + Random.Range(-PitchVariety, PitchVariety);
+
+        freeSource.Play();
     }
 
     private Vector2 RunDeceleration(Vector2 pVelocity)

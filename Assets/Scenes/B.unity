@@ -1243,19 +1243,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3929041601763209936, guid: f4c445e06d5a77649b7ef2d8258d2141,
         type: 3}
-      propertyPath: ExitPoint
-      value: 
-      objectReference: {fileID: 1650869436}
-    - target: {fileID: 3929041601763209936, guid: f4c445e06d5a77649b7ef2d8258d2141,
-        type: 3}
-      propertyPath: ExitVelocity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929041601763209936, guid: f4c445e06d5a77649b7ef2d8258d2141,
-        type: 3}
       propertyPath: Paper
       value: 
       objectReference: {fileID: 640614983}
+    - target: {fileID: 3929041601763209936, guid: f4c445e06d5a77649b7ef2d8258d2141,
+        type: 3}
+      propertyPath: ExitPoint
+      value: 
+      objectReference: {fileID: 1650869436}
     - target: {fileID: 3929041601763209939, guid: f4c445e06d5a77649b7ef2d8258d2141,
         type: 3}
       propertyPath: m_Name

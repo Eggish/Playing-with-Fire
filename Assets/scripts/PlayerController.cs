@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float FireDamage = 0.25f;
 
     [SerializeField] private List<GameObject> BurnObjects = new List<GameObject>();
-    [SerializeField] private GameObject HelpfulJumpFire = null;
 
     private bool OnGround = false;
     private bool BeenBurnt = false;
@@ -46,6 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Fire == null)
             Fire = FindObjectOfType<Fire>();
+        InitialSceneHealthSetup(GameManager.PlayerHealth);
+        GameManager.PaperSceneStartHealth = GameManager.PlayerHealth;
     }
 
     void Update()
@@ -89,7 +90,6 @@ public class PlayerController : MonoBehaviour
         Vector2 raycastOrigin = new Vector2(transform.position.x, transform.position.y - Collider.size.y/2);
         RaycastHit2D hit = Physics2D.Raycast(raycastOrigin, Vector2.down, GroundCheckRayLEngth);
         OnGround = hit && hit.collider.CompareTag("Platform");
-        //OnGround = Physics2D.Raycast(transform.position, Vector2.down, GroundCheckDistance);
     }
 
     private void SetAnimations()
@@ -169,16 +169,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter2D(Collision2D pCollision)
-    //{
-    //    OnGround = true;
-    //}
-
-    //private void OnCollisionExit2D(Collision2D pCollision)
-    //{
-    //    OnGround = false;
-    //}
-
     private void OnTriggerEnter2D(Collider2D pCollider)
     {
         if (pCollider.CompareTag("Fire"))
@@ -209,7 +199,7 @@ public class PlayerController : MonoBehaviour
 
         if (pCollider.CompareTag("Water"))
         {
-            GameManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.ReloadScene();
         }
     }
 
@@ -220,33 +210,82 @@ public class PlayerController : MonoBehaviour
         Fire.ChangeHealth(FireDamage);
 
         BeenBurnt = true;
-        if (GameManager.PlayerHealth < 0)
+        if (GameManager.PlayerHealth <= 0)
         {
-            GameManager.PlayerHealth  = 0;
+            GameManager.LoadScene(0);
         }
         SetHealth(GameManager.PlayerHealth);
     }
 
-
+    private void InitialSceneHealthSetup(float pCurrentHealth)
+    {
+        if (pCurrentHealth >= 1.0f)
+        {
+            return;
+        }
+        if (pCurrentHealth > 0.5f)
+        {
+            BurnObjects[0].SetActive(true);
+            foreach (FireParticle f in BurnObjects[0].GetComponentsInChildren<FireParticle>())
+            {
+                f.gameObject.SetActive(false);
+            }
+            BurnObjects[1].SetActive(false);
+            BurnObjects[2].SetActive(false);
+        }
+        else if (pCurrentHealth > 0.25f)
+        {
+            BurnObjects[0].SetActive(true);
+            foreach (FireParticle f in BurnObjects[0].GetComponentsInChildren<FireParticle>())
+            {
+                f.gameObject.SetActive(false);
+            }
+            BurnObjects[1].SetActive(true);
+            foreach (FireParticle f in BurnObjects[1].GetComponentsInChildren<FireParticle>())
+            {
+                f.gameObject.SetActive(false);
+            }
+            BurnObjects[2].SetActive(false);
+        }
+        else if (pCurrentHealth > 0)
+        {
+            BurnObjects[0].SetActive(true);
+            foreach (FireParticle f in BurnObjects[0].GetComponentsInChildren<FireParticle>())
+            {
+                f.gameObject.SetActive(false);
+            }
+            BurnObjects[1].SetActive(true);
+            foreach (FireParticle f in BurnObjects[1].GetComponentsInChildren<FireParticle>())
+            {
+                f.gameObject.SetActive(false);
+            }
+            BurnObjects[2].SetActive(true);
+            foreach (FireParticle f in BurnObjects[2].GetComponentsInChildren<FireParticle>())
+            {
+                f.gameObject.SetActive(false);
+            }
+        }
+    }
+    
     private void SetHealth(float pCurrentHealth)
     {
         if(pCurrentHealth >= 1.0f)
         {
             return;
         }
-        else if (pCurrentHealth <= 0.75f)
+        if (pCurrentHealth > 0.5f)
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(false);
             BurnObjects[2].SetActive(false);
         }
-        else if (pCurrentHealth <= 0.5f)
+        else if (pCurrentHealth > 0.25f)
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(true);
             BurnObjects[2].SetActive(false);
         }
-        else if (pCurrentHealth <= 0.25f)
+        else if (pCurrentHealth > 0)
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(true);

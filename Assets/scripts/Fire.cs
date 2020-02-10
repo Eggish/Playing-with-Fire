@@ -17,9 +17,14 @@ public class Fire : MonoBehaviour
 
     [SerializeField] private GameObject Smoke = null;
 
+    void Awake()
+    {
+        GameManager.FireSceneStartHealth = GameManager.FireHealth;
+        transform.localScale = new Vector3(GameManager.FireHealth, GameManager.FireHealth, GameManager.FireHealth);
+    }
+
     void Start()
     {
-        transform.localScale = new Vector3(GameManager.FireHealth, GameManager.FireHealth, GameManager.FireHealth);
         if(Paper == null)
             Paper = FindObjectOfType<PlayerController>();
     }
@@ -81,11 +86,13 @@ public class Fire : MonoBehaviour
 
         Invoke("DeactivateSmoke", SmokeDeactivationDelay);
         transform.localScale = new Vector3(GameManager.FireHealth, GameManager.FireHealth, GameManager.FireHealth);
+        float sceneLoadFireHealth = GameManager.FireSceneStartHealth;
         if (ConditionalFire != null
             && pHealthChange > 0)
         {
             ConditionalFire.SetActive(true);
         }
+        GameManager.FireSceneStartHealth = sceneLoadFireHealth;
     }
 
     private void DeactivateSmoke()

@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class PlayerFollow : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField] private PlayerController Paper = null;
+
+    [SerializeField] private Transform LeftMaximum = null;
+    [SerializeField] private Transform RightMaximum = null;
+
+    [SerializeField] private float FollowSpeed = 4.0f;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Vector3 goalPosition = transform.position;
+        goalPosition.x = Mathf.Clamp(Paper.transform.position.x, LeftMaximum.transform.position.x, RightMaximum.transform.position.x);
+        transform.position = Vector3.MoveTowards(transform.position, goalPosition, FollowSpeed * Time.deltaTime);
     }
 }

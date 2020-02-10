@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4256508640148539297}
   - component: {fileID: 4256508640148539296}
   - component: {fileID: 8194832749907803206}
+  - component: {fileID: 520233538548936806}
   m_Layer: 0
   m_Name: PaperDoor
   m_TagString: Untagged
@@ -108,3 +109,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3258667, y: 2.4324894}
   m_EdgeRadius: 0
+--- !u!114 &520233538548936806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4256508640148539359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80436852fbc68f5428d554751cd163ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

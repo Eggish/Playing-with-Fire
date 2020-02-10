@@ -25,5 +25,6 @@ public class BurnSequenceTrigger : MonoBehaviour
     {
         FirePlatformBurner.enabled = true;
         enabled = false;
+        Destroy(gameObject);
     }
 }

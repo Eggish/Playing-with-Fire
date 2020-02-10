@@ -68,6 +68,11 @@ public class Fire : MonoBehaviour
         StartCoroutine(LeaveOnString(ExitPoint.position, ExitVelocity));
     }
 
+    public void ReEnablePaper()
+    {
+        Paper.enabled = true;
+    }
+
     public void ChangeHealth(float pHealthChange)
     {
         GameManager.FireHealth += pHealthChange;

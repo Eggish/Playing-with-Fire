@@ -407,7 +407,6 @@ GameObject:
   - component: {fileID: 1214153844519230397}
   - component: {fileID: 2309547906552839033}
   - component: {fileID: 1223790244}
-  - component: {fileID: 5756384558049468539}
   m_Layer: 2
   m_Name: FireSprite (4)
   m_TagString: Untagged
@@ -500,19 +499,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1223790244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2952785399524960738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9974feb33de7204c8e6b6e1fe5b8185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BurnTime: 1
---- !u!114 &5756384558049468539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -773,6 +759,7 @@ MonoBehaviour:
   - {fileID: 8775357270142789285}
   - {fileID: 2915394879606478047}
   - {fileID: 2384473451968221536}
+  HelpfulJumpFire: {fileID: 0}
 --- !u!95 &4138991780007988023
 Animator:
   serializedVersion: 3
@@ -1243,7 +1230,6 @@ GameObject:
   - component: {fileID: 2988497097534820681}
   - component: {fileID: 2577924406232892151}
   - component: {fileID: 1012746645}
-  - component: {fileID: 7120322058938919042}
   m_Layer: 2
   m_Name: FireSprite (3)
   m_TagString: Untagged
@@ -1348,19 +1334,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BurnTime: 1
---- !u!114 &7120322058938919042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7879343582109545853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9974feb33de7204c8e6b6e1fe5b8185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BurnTime: 1
 --- !u!1 &8775357270142789285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,7 +1380,6 @@ GameObject:
   - component: {fileID: 1006755491178913748}
   - component: {fileID: 2578226595200215457}
   - component: {fileID: 1105466945}
-  - component: {fileID: 2106278893855846006}
   m_Layer: 2
   m_Name: FireSprite (2)
   m_TagString: Untagged
@@ -1512,19 +1484,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BurnTime: 1
---- !u!114 &2106278893855846006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8886085878863522440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9974feb33de7204c8e6b6e1fe5b8185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BurnTime: 1
 --- !u!1 &9044010202123114722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1496,6 @@ GameObject:
   - component: {fileID: 3484142716822355510}
   - component: {fileID: 4597987465750045916}
   - component: {fileID: 182816635}
-  - component: {fileID: 5467182702751228491}
   m_Layer: 2
   m_Name: FireSprite (5)
   m_TagString: Untagged
@@ -1630,19 +1588,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &182816635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9044010202123114722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9974feb33de7204c8e6b6e1fe5b8185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BurnTime: 1
---- !u!114 &5467182702751228491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

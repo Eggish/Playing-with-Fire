@@ -200,6 +200,13 @@ public class PlayerController : MonoBehaviour
             pCollider.gameObject.SetActive(false);
             enabled = false;
         }
+        if (pCollider.CompareTag("BurnSequenceTrigger"))
+        {
+            Animator.SetBool("IsWalking", false);
+            Rigidbody.velocity = Vector2.zero;
+            enabled = false;
+        }
+
         if (pCollider.CompareTag("Water"))
         {
             GameManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

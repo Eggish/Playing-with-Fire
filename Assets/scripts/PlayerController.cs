@@ -144,8 +144,11 @@ public class PlayerController : MonoBehaviour
             pVelocity += (Vector2.left * (MaxRunspeed / SecondsToMaxSpeed) * Time.deltaTime);
         }
 
-        PlayWalkSound();
-        
+        if (OnGround)
+        {
+            PlayWalkSound();
+        }
+
         return pVelocity;
     }
 
@@ -261,7 +264,6 @@ public class PlayerController : MonoBehaviour
                 f.gameObject.SetActive(false);
             }
             BurnObjects[1].SetActive(false);
-            //BurnObjects[2].SetActive(false);
         }
         else if (pCurrentHealth > 0.0f)
         {
@@ -275,7 +277,6 @@ public class PlayerController : MonoBehaviour
             {
                 f.gameObject.SetActive(false);
             }
-            //BurnObjects[2].SetActive(false);
         }
     }
     
@@ -289,13 +290,11 @@ public class PlayerController : MonoBehaviour
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(false);
-            //BurnObjects[2].SetActive(false);
         }
         else if (pCurrentHealth > 0.0f)
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(true);
-            //BurnObjects[2].SetActive(false);
         }
         else if (pCurrentHealth <= 0.0f)
         {
@@ -321,6 +320,8 @@ public class PlayerController : MonoBehaviour
         }
         enabled = false;
         yield return new WaitForSeconds(BurnupRestartTimer);
+        GameManager.PlayerHealth = 1.0f;
+        GameManager.FireHealth = 0.5f;
         GameManager.LoadScene(0);
         yield return null;
     }

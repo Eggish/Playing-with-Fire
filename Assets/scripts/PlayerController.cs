@@ -42,6 +42,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float PitchVariety = 0.1f;
     [SerializeField] private AudioSource[] Sources = null;
 
+    [SerializeField] private GameObject[] DeathFires;
+    [SerializeField] private GameObject BurnUpSmoke = null;
+    [SerializeField] private float DeathFireSpreadDelay = 0.05f;
+    [SerializeField] private float SmokeScreenTime = 0.5f;
+    [SerializeField] private float BurnupRestartTimer = 1.0f;
+
+
     private bool OnGround = false;
     private bool BeenBurnt = false;
 
@@ -237,10 +244,6 @@ public class PlayerController : MonoBehaviour
         Fire.ChangeHealth(FireDamage);
 
         BeenBurnt = true;
-        if (GameManager.PlayerHealth <= 0)
-        {
-            GameManager.LoadScene(0);
-        }
         SetHealth(GameManager.PlayerHealth);
     }
 
@@ -250,7 +253,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (pCurrentHealth > 0.5f)
+        if (pCurrentHealth > 0.33f)
         {
             BurnObjects[0].SetActive(true);
             foreach (FireParticle f in BurnObjects[0].GetComponentsInChildren<FireParticle>())
@@ -258,9 +261,9 @@ public class PlayerController : MonoBehaviour
                 f.gameObject.SetActive(false);
             }
             BurnObjects[1].SetActive(false);
-            BurnObjects[2].SetActive(false);
+            //BurnObjects[2].SetActive(false);
         }
-        else if (pCurrentHealth > 0.25f)
+        else if (pCurrentHealth > 0.0f)
         {
             BurnObjects[0].SetActive(true);
             foreach (FireParticle f in BurnObjects[0].GetComponentsInChildren<FireParticle>())
@@ -272,25 +275,7 @@ public class PlayerController : MonoBehaviour
             {
                 f.gameObject.SetActive(false);
             }
-            BurnObjects[2].SetActive(false);
-        }
-        else if (pCurrentHealth > 0)
-        {
-            BurnObjects[0].SetActive(true);
-            foreach (FireParticle f in BurnObjects[0].GetComponentsInChildren<FireParticle>())
-            {
-                f.gameObject.SetActive(false);
-            }
-            BurnObjects[1].SetActive(true);
-            foreach (FireParticle f in BurnObjects[1].GetComponentsInChildren<FireParticle>())
-            {
-                f.gameObject.SetActive(false);
-            }
-            BurnObjects[2].SetActive(true);
-            foreach (FireParticle f in BurnObjects[2].GetComponentsInChildren<FireParticle>())
-            {
-                f.gameObject.SetActive(false);
-            }
+            //BurnObjects[2].SetActive(false);
         }
     }
     
@@ -300,27 +285,43 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (pCurrentHealth > 0.5f)
+        if (pCurrentHealth > 0.33f)
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(false);
-            BurnObjects[2].SetActive(false);
+            //BurnObjects[2].SetActive(false);
         }
-        else if (pCurrentHealth > 0.25f)
+        else if (pCurrentHealth > 0.0f)
         {
             BurnObjects[0].SetActive(true);
             BurnObjects[1].SetActive(true);
-            BurnObjects[2].SetActive(false);
-        }
-        else if (pCurrentHealth > 0)
-        {
-            BurnObjects[0].SetActive(true);
-            BurnObjects[1].SetActive(true);
-            BurnObjects[2].SetActive(true);
+            //BurnObjects[2].SetActive(false);
         }
         else if (pCurrentHealth <= 0.0f)
         {
-            GameManager.LoadScene(0);
+            StartCoroutine(BurnUp());
         }
+    }
+
+    private IEnumerator BurnUp()
+    {
+        BurnObjects[2].SetActive(true);
+        foreach (GameObject g in DeathFires)
+        {
+            g.SetActive(true);
+            yield return new WaitForSeconds(DeathFireSpreadDelay);
+        }
+        BurnUpSmoke.SetActive(true);
+        yield return new WaitForSeconds(SmokeScreenTime);
+        BurnUpSmoke.SetActive(false);
+        GetComponent<SpriteRenderer>().enabled = false;
+        foreach (GameObject g in BurnObjects)
+        {
+            g.SetActive(false);
+        }
+        enabled = false;
+        yield return new WaitForSeconds(BurnupRestartTimer);
+        GameManager.LoadScene(0);
+        yield return null;
     }
 }
